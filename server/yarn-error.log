@@ -1,0 +1,41 @@
+Arguments: 
+  /usr/bin/node /usr/bin/yarn add dotenv morgon express mongoose helmet
+
+PATH: 
+  /home/bikram/bin:/home/bikram/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  14.16.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/morgon: Not found
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66947:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140665:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141637:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141559:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (internal/streams/readable.js:1327:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
