@@ -6,12 +6,12 @@ import {
   Notifications,
   Timeline,
 } from "@material-ui/icons";
-import HomeIcon from "@material-ui/icons/Home";
-import "./navbar.css";
 import { IconButton } from "@material-ui/core";
+import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import Logout from "../logout/Logout";
 function Navbar() {
   const { user } = useContext(AuthContext);
   return (
@@ -37,18 +37,14 @@ function Navbar() {
         <div className="topbarRight">
           <div className="topbarLinks">
             <span className="topbarLink">
-              <Link to="/">
-                <IconButton>
-                  <HomeIcon />
-                </IconButton>
-              </Link>
-            </span>
-            <span className="topbarLink">
               <Link to="/timeline">
                 <IconButton>
                   <Timeline />
                 </IconButton>
               </Link>
+            </span>
+            <span className="topbarLink">
+              <Logout />
             </span>
           </div>
           <div className="topbarIcons">

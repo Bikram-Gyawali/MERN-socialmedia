@@ -94,3 +94,9 @@
     object-fit: cover;
     cursor: pointer;
 }
+
+.topbarLinks {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

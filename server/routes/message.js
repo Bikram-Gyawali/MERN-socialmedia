@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Message = require("../models/Message");
-
+const auth = require("../middleware/auth.middleware");
 //add
 
 router.post("/", async (req, res) => {
@@ -16,10 +16,10 @@ router.post("/", async (req, res) => {
 
 //get
 
-router.get("/:conversationId", async (req, res) => {
+router.get("/:convoId", async (req, res) => {
   try {
     const messages = await Message.find({
-      conversationId: req.params.conversationId,
+      convoId: req.params.convoId,
     });
     res.status(200).json(messages);
   } catch (err) {

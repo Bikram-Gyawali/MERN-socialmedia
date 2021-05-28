@@ -42,4 +42,13 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/logout", async (req, res) => {
+  try {
+    localStorage.clear("token");
+    res.status(200).json();
+  } catch (err) {
+    res.status(500).json(err, "cannot logout user");
+  }
+});
+
 module.exports = router;

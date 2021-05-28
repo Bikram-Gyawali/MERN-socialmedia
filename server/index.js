@@ -9,14 +9,13 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const convoRoute = require("./routes/convo");
 const messageRoute = require("./routes/message");
-const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 dotenv.config();
 
 mongoose.connect(
   process.env.DATABASE_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   () => {
     console.log("Connected to MongoDB");
   }
