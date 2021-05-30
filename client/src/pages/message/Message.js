@@ -10,7 +10,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Picker from "emoji-picker-react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, InsertEmoticon, Mic } from "@material-ui/icons";
+import { AttachFile, InsertEmoticon, Mic, Cancel } from "@material-ui/icons";
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -18,6 +18,7 @@ export default function Messenger() {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [file, setFile] = useState(null);
   const socket = useRef();
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
@@ -28,6 +29,7 @@ export default function Messenger() {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
+        image: data.image,
         createdAt: Date.now(),
       });
     });
@@ -77,6 +79,7 @@ export default function Messenger() {
     const message = {
       sender: user._id,
       text: newMessage,
+      image: file,
       convoId: currentChat._id,
     };
 
@@ -88,8 +91,20 @@ export default function Messenger() {
       senderId: user._id,
       receiverId,
       text: newMessage,
+      image: file,
     });
-
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      message.image = fileName;
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     try {
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]);
@@ -110,7 +125,7 @@ export default function Messenger() {
       trigger="click"
       placement="top"
       overlay={popover}
-      delay={{ show: 50, hide: 100 }}
+      // delay={{ show: 50, hide: 100 }}
     >
       <IconButton>
         <InsertEmoticon />
@@ -155,6 +170,19 @@ export default function Messenger() {
                   ))}
                 </div>
                 <div className="chatBoxBottom">
+                  {file && (
+                    <div className="shareImgContainer">
+                      <img
+                        className="shareImage"
+                        src={URL.createObjectURL(file)}
+                        alt=""
+                      />
+                      <Cancel
+                        className="shareCancelImg"
+                        onClick={() => setFile(null)}
+                      />
+                    </div>
+                  )}
                   <form
                     className="chatForm"
                     required
@@ -176,6 +204,18 @@ export default function Messenger() {
                       type="text"
                     />
                     <Emojis />
+                    <IconButton>
+                      <label htmlFor="file" className="shareOption">
+                        <AttachFile />
+                        <input
+                          style={{ display: "none" }}
+                          type="file"
+                          id="file"
+                          accept=".png,.jpeg,.jpg , .mp4"
+                          onChange={(e) => setFile(e.target.files[0])}
+                        />
+                      </label>
+                    </IconButton>
                     <button
                       type="submit"
                       className="chatSubmitButton"
@@ -206,3 +246,5 @@ export default function Messenger() {
     </>
   );
 }
+
+// predestination and annihalation movie to watch today and tomorrow

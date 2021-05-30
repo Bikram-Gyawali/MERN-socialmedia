@@ -103,3 +103,14 @@
         flex: 1px;
     }
 }
+
+.shareImgContainer {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.shareImage {
+    height: 250px;
+    width: 250px;
+}
