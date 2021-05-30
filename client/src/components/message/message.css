@@ -8,12 +8,18 @@
     display: flex;
 }
 
+.messageTop.own {
+    flex-direction: row-reverse;
+    position: relative;
+}
+
 .messageImg {
-    width: 32px;
-    height: 32px;
+    display: flex;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 10px;
+    align-self: flex-end;
 }
 
 .messageText {
@@ -22,6 +28,13 @@
     background-color: #1877f2;
     color: white;
     max-width: 300px;
+}
+
+.messageEmoji {
+    size: 10px 50px;
+    background-color: none;
+    font-size: 30px;
+    letter-spacing: 0.2em;
 }
 
 .messageBottom {

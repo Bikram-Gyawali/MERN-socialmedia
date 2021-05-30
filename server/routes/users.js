@@ -55,6 +55,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id/details", async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const user = await User.findById(userId);
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get friends
 router.get("/friends/:userId", async (req, res) => {
   try {

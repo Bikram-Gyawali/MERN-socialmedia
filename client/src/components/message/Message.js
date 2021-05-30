@@ -1,16 +1,36 @@
 import "./message.css";
 import { format } from "timeago.js";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Message({ message, own }) {
+  // console.log(message);
+  const [details, setDetails] = useState("");
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const res = await axios.get(`/users/${message.sender}/details`);
+        setDetails(res.data);
+      } catch (err) {}
+    };
+    getDetails();
+  }, []);
   return (
     <div className={own ? "message own" : "message"}>
-      <div className="messageTop">
+      <div className={own ? "messageTop own" : "messageTop"}>
         <img
-          className="messageImg"
-          src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          className={own ? "messageImg own " : "messageImg "}
+          src={details ? details.profilePicture : ""}
           alt=""
         />
-        <p className="messageText">{message.text}</p>
+        <p
+          className={
+            /[a-zA-z0-9]/.test(message.text) ? "messageText" : "messageEmoji"
+          }
+        >
+          {message.text}
+        </p>
       </div>
       <div className="messageBottom">{format(message.createdAt)}</div>
     </div>

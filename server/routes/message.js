@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Message = require("../models/Message");
-const auth = require("../middleware/auth.middleware");
 //add
 
 router.post("/", async (req, res) => {
